@@ -1,0 +1,37 @@
+
+.App {
+  text-align: center;
+}
+
+.home{
+  display: flex;
+  height: 100vh;
+}
+
+.nav{
+  width: 20%;
+  height: 100%;
+  background-color: rgb(24, 113, 185);
+  color: white;
+  margin-left: 0;
+  border-bottom-right-radius: 70px;
+}
+
+.dashboard-container{
+  width: 80%;
+  background-color: rgb(247, 247, 247);
+}
+
+.header{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12%;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+  list-style: none;
+}
