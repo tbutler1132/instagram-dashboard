@@ -1,34 +1,46 @@
 import './App.css';
 import Nav from './components/Nav';
-import DashboardContainer from './components/CampaignContainer';
+import DashboardContainer from './components/DashboardContainer';
+import { useState } from 'react';
+import Instagram from './components/Instagram';
 
 
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Login from './components/Login';
+import {Switch, Route} from 'react-router-dom'
+import Login from './components/Login'; 
 
 function App() {
+  const [token, setToken] = useState('')
+
+  const loginHandler = (token) => {
+    setToken(token)
+  }
+
   return (
-    <Router>
-    <div className="App">
-      <div className="home">
-        <div className="nav">
-        </div>
-        <Switch>
-          <Route path="/dashboard">
-          <Nav campaigns={""}/>
-            <div className="dashboard-container">
-              <DashboardContainer campaigns={""}/>
-            </div>
-          </Route>
-          <Route path="/login">
-            <div >
-              <Login />
-            </div>
-          </Route>
-        </Switch>
+
+      <div className="App">
+
+
+          <Switch>
+            <Route path="/login">
+                <Login setToken={loginHandler}/>
+            </Route>
+            <Route path="/instagram">
+                <Instagram token={token} />
+            </Route>
+            <Route path="/dashboard">
+              <div className="home">
+                <div className="nav">
+                  <Nav token={token} campaigns={""}/>
+                </div>
+                <div className="dashboard-container">
+                  <DashboardContainer token={token} campaigns={""}/>
+                </div>
+              </div>
+            </Route>
+          </Switch>
+
       </div>
-    </div>
-    </Router> 
+
   );
 }
 

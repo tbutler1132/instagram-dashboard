@@ -1,32 +1,37 @@
 import { FacebookProvider, LoginButton } from 'react-facebook';
-import { useState } from 'react';
+import {useHistory} from 'react-router-dom'
 
-function Login(props) {
+function Login({setToken}) {
 
-    const [data, setData] = useState(false)
+    const history = useHistory()
+
+    console.log(history)
 
     const handleResponse = (data) => {
-        setData(data);
+        setToken(data.tokenDetail?.accessToken)
+        history.push('/dashboard')
       }
      
     const handleError = (error) => {
         console.log({ error });
       }
 
-      console.log(data)
-
 
     return (
+      <div className="login-container">
         <FacebookProvider appId="1153580595131093">
-        <LoginButton
-          scope="email"
-          onCompleted={handleResponse}
-          onError={handleError}
-        >
-          <span>Login via Facebook</span>
-        </LoginButton>
-            {data ? <p>{data.profile.email}</p> : null}
-      </FacebookProvider>
+          <LoginButton
+            scope="email, instagram_basic, pages_show_list"
+            onCompleted={handleResponse}
+            onError={handleError}
+            className="login-button"
+          >
+            <span>Login via Facebook</span>
+          </LoginButton>
+            {/* {data ? <p>{data.profile.email}</p> : null}
+            <Instagram token={data.tokenDetail?.accessToken}/> */}
+        </FacebookProvider>
+      </div>
     );
 }
 

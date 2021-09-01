@@ -1,6 +1,12 @@
 import Header from "./Header";
+import {useEffect} from 'react'
 
-function Nav() {
+function Nav({token}) {
+
+    useEffect(() => {
+
+    })
+
     return (
         <div style={{height: '100%'}}>
             <Header />
