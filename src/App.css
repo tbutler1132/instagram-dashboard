@@ -17,11 +17,6 @@
   border-bottom-right-radius: 70px;
 }
 
-.dashboard-container{
-  width: 80%;
-  background-color: rgb(247, 247, 247);
-}
-
 .header{
   display: flex;
   justify-content: space-around;
@@ -34,4 +29,23 @@
   justify-content: space-around;
   height: 50%;
   list-style: none;
+  text-align: left;
+  margin-left: 18%;
+}
+
+.dashboard-container{
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+}
+
+.campaign{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-left: 4%;
+  padding-top: 1%;
+}
+
+.time-range-select{
+  width: 10%;
 }

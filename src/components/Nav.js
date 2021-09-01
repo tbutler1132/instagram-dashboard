@@ -5,10 +5,10 @@ function Nav() {
         <div style={{height: '100%'}}>
             <Header />
             <div className="nav-items">
-                    <li>Dashboard</li>
-                    <li>Dashboard</li>
-                    <li>Dashboard</li>
-                    <li>Dashboard</li>
+                    <h1>Campaigns</h1>
+                    <li>Red Ocean</li>
+                    <li>Blue square</li>
+                    <li>Green Tile</li>
             </div>
         </div>
     );
