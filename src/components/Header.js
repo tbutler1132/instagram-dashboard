@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header(props) {
+function Header({bio}) {
     return (
         <div className="header" >
             <div className="profile-pic">
@@ -8,7 +8,7 @@ function Header(props) {
             </div>
             <div className="profile-bio" style={{textAlign: 'left'}}>
                 <h3>Alicia Keys</h3>
-                <h5 style={{color: '#000'}}>akeys11@gmail.com</h5>
+                <h5 style={{color: '#000'}}>{bio}</h5>
             </div>
         </div>
     );
