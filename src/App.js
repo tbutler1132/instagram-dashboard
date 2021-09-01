@@ -1,21 +1,33 @@
 import './App.css';
 import Nav from './components/Nav';
 import DashboardContainer from './components/DashboardContainer';
-import { useState } from 'react';
-import Instagram from './components/Instagram';
+import { useState, useEffect } from 'react';
 import { FacebookProvider, LoginButton } from 'react-facebook';
 import SelectPage from './components/SelectPage';
-
-
 import {Switch, Route, useHistory} from 'react-router-dom'
-import Login from './components/Login'; 
+import axios from 'axios';
+
 
 function App() {
   const [token, setToken] = useState('')
   const [pageId, setPageId] = useState('')
+  const [instagramId, setInstagramId] = useState('')
   const history = useHistory()
 
-  console.log(pageId)
+  console.log(token)
+  console.log(instagramId)
+
+  useEffect(() => {
+    if(pageId){
+      const getData = async () => {
+
+        const instaAccount = await axios.get(`https://graph.facebook.com/v11.0/${pageId}?access_token=${token}&fields=instagram_business_account`)
+        setInstagramId(instaAccount.data.instagram_business_account.id)
+      }
+      getData()
+    }
+  })
+
 
   const handleResponse = (data) => {
     console.log(data)
@@ -52,18 +64,18 @@ function App() {
             <Route path="/pages">
               <SelectPage token={token} pageHandler={pageHandler}/>
             </Route>
-            <Route path="/instagram">
-                <Instagram token={token} />
-            </Route>
             <Route path="/dashboard">
+            {instagramId ? 
               <div className="home">
                 <div className="nav">
-                  <Nav pageId={pageId} token={token} campaigns={""}/>
+                  <Nav instagramId={instagramId} token={token} campaigns={""}/>
                 </div>
                 <div className="dashboard-container">
-                  <DashboardContainer token={token} campaigns={""}/>
+                  <DashboardContainer instagramId={instagramId} token={token} campaigns={""}/>
                 </div>
               </div>
+              : 
+              <div>Loading...</div>}
             </Route>
           </Switch>
       </div>

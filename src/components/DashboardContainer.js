@@ -1,13 +1,11 @@
-import Campaign from './Campaign';
-import Instagram from './Instagram';
+import Home from './Home';
 
-function DashboardContainer({token}) {
+function DashboardContainer({instagramId, token}) {
 
 
     return (
         <div>
-            DashboardContainer
-            <Instagram token={token} />
+            <Home token={token} instagramId={instagramId}/>
         </div>
     );
 }
