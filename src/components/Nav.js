@@ -1,6 +1,7 @@
 import Header from "./Header";
 import {useEffect, useState} from 'react'
 import axios from "axios";
+import hamburger from '../icons8-menu-24.png'
 
 function Nav({token, instagramId}) {
 
@@ -20,7 +21,7 @@ function Nav({token, instagramId}) {
     console.log(accountInfo)
 
     return (
-        <div style={{height: '100%'}}>
+        <div className="nav-container">
             <Header name={accountInfo.name} picture={accountInfo.profile_picture_url} bio={accountInfo.biography}/>
             <div className="nav-items">
                     <h1>Dashboard</h1>
@@ -28,6 +29,7 @@ function Nav({token, instagramId}) {
                     <li>Blue square</li>
                     <li>Green Tile</li>
             </div>
+            <img id="hamburger-button" src={hamburger} alt="" />
         </div>
     );
 }

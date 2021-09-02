@@ -4,7 +4,7 @@ import DashboardContainer from './components/DashboardContainer';
 import { useState, useEffect } from 'react';
 import { FacebookProvider, LoginButton } from 'react-facebook';
 import SelectPage from './components/SelectPage';
-import {Switch, Route, useHistory} from 'react-router-dom'
+import {Switch, Route, useHistory, Redirect} from 'react-router-dom'
 import axios from 'axios';
 
 
@@ -15,9 +15,18 @@ function App() {
   const history = useHistory()
 
   useEffect(() => {
+    const storedToken = localStorage.getItem('token')
+    const instagramId = localStorage.getItem('instagramId')
+
+    if(instagramId){
+      setToken(storedToken)
+      setInstagramId(instagramId)
+    }
+
     if(pageId){
       const getData = async () => {
         const instaAccount = await axios.get(`https://graph.facebook.com/v11.0/${pageId}?access_token=${token}&fields=instagram_business_account`)
+        localStorage.setItem('instagramId', instaAccount.data.instagram_business_account.id)
         setInstagramId(instaAccount.data.instagram_business_account.id)
       }
       getData()
@@ -26,8 +35,8 @@ function App() {
 
 
   const handleResponse = (data) => {
-    console.log(data)
     setToken(data.tokenDetail?.accessToken)
+    localStorage.setItem('token', data.tokenDetail?.accessToken)
     history.push('/pages')
   }
 
@@ -40,6 +49,7 @@ function App() {
     console.log({ error });
   }
 
+  if(instagramId) return(<Redirect to="/dashboard"></Redirect>)
   return (
       <div className="App">
           <Switch>

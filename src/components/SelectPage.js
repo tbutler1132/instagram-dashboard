@@ -19,14 +19,17 @@ function SelectPage({token, pageHandler}) {
     console.log(pages)
 
     const renderPages = () => {
-        return pages.map(pages => <p value={pages.id} onClick={() => pageHandler(pages.id)} key={pages.id}>{pages.name}</p>)
+        return pages.map(pages => <div className="page-option"><p value={pages.id} onClick={() => pageHandler(pages.id)} key={pages.id}>{pages.name}</p></div>)
     }
 
     if(!pages) return null
     return (
         <div>
-            <h1>Select which page you want to view</h1>
-            {renderPages()}
+            <h1>Facebook Page</h1>
+            <h4>Select the Facebook page connected to the Instagram account you want to view</h4>
+            <div className="page-list">
+                {renderPages()}
+            </div>
         </div>
     );
 }

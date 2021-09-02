@@ -16,14 +16,14 @@ function Home({instagramId, token}) {
         return photos.map(photo =>
         <div className="instagram-post" key={photo.id}>
             <img height="250px" width="250px" key={photo.id} src={photo.media_url} alt="" />
-            <small>{photo.caption}</small>
+            <small id="caption">{photo.caption}</small>
         </div> 
         )
     }
 
     return (
         <div className="home-dash">
-            <h1>Photo Feed</h1>
+            <h1>Feed</h1>
             <div className="photo-feed">
                 {renderPictures()}
             </div>

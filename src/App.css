@@ -1,3 +1,6 @@
+* {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
 
 .App {
   text-align: center;
@@ -17,6 +20,10 @@
   border-bottom-right-radius: 70px;
 }
 
+.nav-container{
+  height: 100%;
+}
+
 .header{
   display: flex;
   justify-content: space-around;
@@ -33,8 +40,33 @@
   margin-left: 18%;
 }
 
+#hamburger-button{
+  display: none;
+}
 
-
+@media only screen and (max-width: 1000px) {
+  .nav {
+    width: 100%;
+    min-height: fit-content;
+    text-align: center;
+    background-color: white;
+  }
+  .nav-items{
+    align-items: center;
+    height: 10%;
+    text-align: center;
+    display: none;
+  }
+  #instagram-name{
+    color: black;
+  }
+  #hamburger-button{
+    display: block;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+}
 
 .dashboard-container{
   width: 80%;
@@ -66,6 +98,10 @@
   padding: 15px 32px;
 }
 
+.home-dash{
+  margin-top: 7%;
+}
+
 .photo-feed{
   display: flex;
   border: solid;
@@ -85,21 +121,52 @@
   flex-direction: column;
   box-shadow: 0 0 10px #041522;
   padding: 10px 5px 10px 5px;
+  border-radius: 5px;
+}
+
+#caption{
+  margin-top: 10px;
+}
+
+
+
+.page-list{
+  border: solid;
+  border-color: rgb(0, 162, 255);
+  background-color: aliceblue;
+  border-radius: 4px;
+  margin-right: 40%;
+  margin-left: 40%;
+  padding: 4px 0px 4px 0px;
+}
+
+.page-option{
+  background-color: rgb(195, 225, 236);
+  border: solid;
+  border-color: #1779c9;
+  margin: 4px 25% 4px 25%;
+  cursor: pointer;
+}
+
+.page-option:hover{
+  background-color: gainsboro;
 }
 
 @media only screen and (max-width: 1000px) {
   .home {
     flex-direction: column;
   };
-  .nav {
-    width: 100%;
-    height: 20%
-  };
-  .nav-items{
-    flex-direction: row;
-  }
+}
+
+@media only screen and (max-width: 1200px) {
   .photo-feed{
     flex-direction: column;
     align-items: center;
+    min-width: fit-content;
+  }
+  .header{
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
   }
 }
