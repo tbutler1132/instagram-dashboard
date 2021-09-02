@@ -14,7 +14,7 @@ function Home({instagramId, token}) {
 
     const renderPictures = () => {
         return photos.map(photo =>
-        <div key={photo.id}>
+        <div className="instagram-post" key={photo.id}>
             <img height="250px" width="250px" key={photo.id} src={photo.media_url} alt="" />
             <small>{photo.caption}</small>
         </div> 

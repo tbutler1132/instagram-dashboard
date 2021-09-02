@@ -22,10 +22,6 @@ function SelectPage({token, pageHandler}) {
         return pages.map(pages => <p value={pages.id} onClick={() => pageHandler(pages.id)} key={pages.id}>{pages.name}</p>)
     }
 
-    const clickHandler = (id) => {
-        console.log(id)
-    }
-
     if(!pages) return null
     return (
         <div>

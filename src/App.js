@@ -14,13 +14,9 @@ function App() {
   const [instagramId, setInstagramId] = useState('')
   const history = useHistory()
 
-  console.log(token)
-  console.log(instagramId)
-
   useEffect(() => {
     if(pageId){
       const getData = async () => {
-
         const instaAccount = await axios.get(`https://graph.facebook.com/v11.0/${pageId}?access_token=${token}&fields=instagram_business_account`)
         setInstagramId(instaAccount.data.instagram_business_account.id)
       }
