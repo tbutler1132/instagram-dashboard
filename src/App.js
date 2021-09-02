@@ -64,6 +64,9 @@ function App() {
 
   return (
       <div className="App">
+          <Route path="/">
+            {loggedIn ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+          </Route>
           <Switch>
             <Route path="/login">
               {loggedIn ? <Redirect to="/dashboard" /> :
