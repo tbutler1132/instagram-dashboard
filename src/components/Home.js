@@ -10,7 +10,7 @@ function Home({instagramId, token}) {
             setPhotos(media.data.data)
         }
         getData()
-    }, [])
+    }, [instagramId, token])
 
     const renderPictures = () => {
         return photos.map(photo =>
@@ -23,7 +23,7 @@ function Home({instagramId, token}) {
 
     return (
         <div className="home-dash">
-            <h1>Feed</h1>
+            <h1>Posts</h1>
             <div className="photo-feed">
                 {renderPictures()}
             </div>

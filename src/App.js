@@ -12,48 +12,61 @@ function App() {
   const [token, setToken] = useState('')
   const [pageId, setPageId] = useState('')
   const [instagramId, setInstagramId] = useState('')
+  const [loggedIn, setLoggedIn] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
+
     const storedToken = localStorage.getItem('token')
-    const instagramId = localStorage.getItem('instagramId')
+    const storedPageId = localStorage.getItem('pageId')
+    const storedInstagramId = localStorage.getItem('instagramId')
 
-    if(instagramId){
+    if(storedToken){
       setToken(storedToken)
-      setInstagramId(instagramId)
+      setPageId(storedPageId)
+      setInstagramId(storedInstagramId)
+      setLoggedIn(true)
     }
-
-    if(pageId){
-      const getData = async () => {
-        const instaAccount = await axios.get(`https://graph.facebook.com/v11.0/${pageId}?access_token=${token}&fields=instagram_business_account`)
-        localStorage.setItem('instagramId', instaAccount.data.instagram_business_account.id)
-        setInstagramId(instaAccount.data.instagram_business_account.id)
-      }
-      getData()
-    }
-  })
+  }, [setToken, setPageId, setInstagramId, setLoggedIn])
 
 
   const handleResponse = (data) => {
-    setToken(data.tokenDetail?.accessToken)
-    localStorage.setItem('token', data.tokenDetail?.accessToken)
+    const accessToken = data.tokenDetail?.accessToken
+    setToken(accessToken)
+    localStorage.setItem('token', accessToken)
+    setLoggedIn(true)
     history.push('/pages')
   }
 
-  const pageHandler = (id) => {
-    setPageId(id)
-    history.push('/dashboard')
-  }
- 
   const handleError = (error) => {
     console.log({ error });
   }
 
-  if(instagramId) return(<Redirect to="/dashboard"></Redirect>)
+  const pageHandler = async (id) => {
+    setPageId(id)
+    localStorage.setItem('pageId', id)
+    history.push('/dashboard')
+    const instaAccount = await axios.get(`https://graph.facebook.com/v11.0/${id}?access_token=${token}&fields=instagram_business_account`)
+    localStorage.setItem('instagramId', instaAccount.data.instagram_business_account.id)
+    setInstagramId(instaAccount.data.instagram_business_account.id)
+  }
+
+  const logoutHandler = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('pageId')
+    localStorage.removeItem('instagramId')
+    setToken('')
+    setPageId('')
+    setInstagramId('')
+    setLoggedIn(false)
+    history.push('/login')
+  }
+
   return (
       <div className="App">
           <Switch>
             <Route path="/login">
+              {loggedIn ? <Redirect to="/dashboard" /> :
               <div className="login-container">
                 <FacebookProvider appId="1153580595131093">
                   <LoginButton
@@ -66,23 +79,25 @@ function App() {
                   </LoginButton>
                 </FacebookProvider>
               </div>
+              }
             </Route>
-            <Route path="/pages">
-              <SelectPage token={token} pageHandler={pageHandler}/>
-            </Route>
+            {token ? 
+              <Route path="/pages">
+                <SelectPage token={token} pageHandler={pageHandler}/>
+              </Route>
+            : null}
+            {token ? 
             <Route path="/dashboard">
-            {instagramId ? 
               <div className="home">
                 <div className="nav">
-                  <Nav instagramId={instagramId} token={token} campaigns={""}/>
+                  <Nav instagramId={instagramId} token={token} logoutHandler={logoutHandler}/>
                 </div>
                 <div className="dashboard-container">
                   <DashboardContainer instagramId={instagramId} token={token} campaigns={""}/>
                 </div>
               </div>
-              : 
-              <div>Loading...</div>}
             </Route>
+            : null}
           </Switch>
       </div>
   );

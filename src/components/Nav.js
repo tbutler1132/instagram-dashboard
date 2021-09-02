@@ -3,10 +3,9 @@ import {useEffect, useState} from 'react'
 import axios from "axios";
 import hamburger from '../icons8-menu-24.png'
 
-function Nav({token, instagramId}) {
+function Nav({token, instagramId, logoutHandler}) {
 
     const [accountInfo, setAccountInfo] = useState({})
-
 
     useEffect(() => {
         if(token){
@@ -16,18 +15,17 @@ function Nav({token, instagramId}) {
             }
            getData()
         }
-    }, [token])
-
-    console.log(accountInfo)
+    }, [token, instagramId])
 
     return (
         <div className="nav-container">
             <Header name={accountInfo.name} picture={accountInfo.profile_picture_url} bio={accountInfo.biography}/>
             <div className="nav-items">
                     <h1>Dashboard</h1>
-                    <li>Red Ocean</li>
-                    <li>Blue square</li>
-                    <li>Green Tile</li>
+                    <li className="nav-link">Insights</li>
+                    <li className="nav-link">Competitors</li>
+                    <li className="nav-link">Invitations</li>
+                    <small onClick={logoutHandler} className="nav-link" id="logout-button">Logout</small>
             </div>
             <img id="hamburger-button" src={hamburger} alt="" />
         </div>

@@ -9,17 +9,15 @@ function SelectPage({token, pageHandler}) {
         if(token){
             const getData = async () => {
                 const userPages = await axios.get(`https://graph.facebook.com/v11.0/me/accounts?access_token=${token}`)
-                console.log(userPages)
                 setPages(userPages.data.data)
             }
            getData()
         }
     }, [token])
 
-    console.log(pages)
 
     const renderPages = () => {
-        return pages.map(pages => <div className="page-option"><p value={pages.id} onClick={() => pageHandler(pages.id)} key={pages.id}>{pages.name}</p></div>)
+        return pages.map(pages => <div className="page-option"><p key={pages.id} onClick={() => pageHandler(pages.id)} key={pages.id}>{pages.name}</p></div>)
     }
 
     if(!pages) return null
