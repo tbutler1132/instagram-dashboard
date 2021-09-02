@@ -1,4 +1,4 @@
-[DEMO LINK](https://www.loom.com/share/2cb56c45ba93491bb0dc667e1fcf8376)
+[DEMO LINK](https://loom.com/share/c3c9eae1e4fe4ae2907ea802c565ea70)
 
 Implements Facebook login using Graph API. Pulls in posts from feed of an Instagram account linked to user's Facebook profile.
 
