@@ -3,7 +3,9 @@
 # Install
 Fork and clone
 `$ git clone `
+
 `$ npm install`
+
 `$ npm start`
 
 
