@@ -20,7 +20,7 @@ function SelectPage({token, pageHandler}) {
         return pages.map(pages => <div className="page-option"><p key={pages.id} onClick={() => pageHandler(pages.id)} key={pages.id}>{pages.name}</p></div>)
     }
 
-    if(!pages) return null
+    if(!pages) return <div>Loading...</div>
     return (
         <div>
             <h1>Facebook Page</h1>

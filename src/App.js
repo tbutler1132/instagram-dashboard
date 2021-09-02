@@ -82,21 +82,21 @@ function App() {
               }
             </Route>
             {token ? 
+            <>
               <Route path="/pages">
                 <SelectPage token={token} pageHandler={pageHandler}/>
               </Route>
-            : null}
-            {token ? 
-            <Route path="/dashboard">
-              <div className="home">
-                <div className="nav">
-                  <Nav instagramId={instagramId} token={token} logoutHandler={logoutHandler}/>
+              <Route path="/dashboard">
+                <div className="home">
+                  <div className="nav">
+                    <Nav instagramId={instagramId} token={token} logoutHandler={logoutHandler}/>
+                  </div>
+                  <div className="dashboard-container">
+                    <DashboardContainer instagramId={instagramId} token={token} campaigns={""}/>
+                  </div>
                 </div>
-                <div className="dashboard-container">
-                  <DashboardContainer instagramId={instagramId} token={token} campaigns={""}/>
-                </div>
-              </div>
-            </Route>
+              </Route>
+            </>
             : null}
           </Switch>
       </div>
